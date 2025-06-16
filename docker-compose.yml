@@ -1,0 +1,14 @@
+version: '3.9'
+
+services:
+  only-location-app:
+    build: .
+    container_name: only-location
+    env_file:
+      - .env
+    volumes:
+      - .:/app        # Monta código para atualizações imediatas
+    ports:
+      - "8000:8000"   # Exemplo: mapeie porta se seu app rodar web server (ajuste conforme necessário)
+    restart: unless-stopped
+    command: python main.py  # Pra garantir que rodará o main.py ao iniciar

@@ -9,7 +9,6 @@ import pyodbc
 from dotenv import load_dotenv, dotenv_values
 
 
-
 # Carregando variaveis de ambiente
 load_dotenv()
 
@@ -18,18 +17,20 @@ load_dotenv()
 veiculosNaoLocalizados = []
 
 
-def conexaoDb(driver=os.getenv("DRIVER"), server=os.getenv("SERVER"), database=os.getenv("DATABASE"), username=os.getenv("USERNAME"), password=os.getenv("PASSWORD")):
+def conexaoDb():
     try:
-        # String de conexão formatada corretamente
-        conn = pyodbc.connect(f'DRIVER={driver};'
-                              f'SERVER={server};'
-                              f'DATABASE={database};'
-                              f'UID={username};'
-                              f'PWD={password}')
+        conn = pyodbc.connect(
+            f"DRIVER={os.getenv('DB_DRIVER')};"
+            f"SERVER={os.getenv('DB_SERVER')};"
+            f"DATABASE={os.getenv('DB_DATABASE')};"
+            f"UID={os.getenv('DB_USER')};"
+            f"PWD={os.getenv('DB_PASSWORD')}"
+        )
         print("Conexão bem-sucedida!")
         return conn
     except Exception as e:
         print("Erro ao conectar ao banco de dados:", e)
+
 
 conexaoDb()
 
